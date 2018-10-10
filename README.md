@@ -99,8 +99,10 @@ Invokes the CAS Command Line Shell. For a list of commands either use no argumen
 ./build.sh cli
 ```
 
-启动方式:
+## 启动方式:
+```bash
 build.cmd   run -X
 build.cmd   debug -X
 Tomcat 启动 E:\codes\workspaces\cas-overlay-template-5.2\target\cas
 java -jar -Dserver.port=8445 cas.war
+```
