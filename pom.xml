@@ -46,11 +46,13 @@
                             <artifactId>cas-server-webapp${app.server}</artifactId>
                             <!--原有的服务不再初始化进去-->
                             <excludes>
-
-                              <!--  <exclude>WEB-INF/classes/application.*</exclude>-->
+                                <!--<exclude>WEB-INF/classes/application.properties</exclude>-->
                             </excludes>
                         </overlay>
                     </overlays>
+                    <dependentWarExcludes>
+                        **/services/*.json,**/templates/protocol/2.0/casServiceValidationSuccess.html
+                    </dependentWarExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -121,6 +123,85 @@
                 <!--
                 ...Additional dependencies may be placed here...
                 -->
+                <!--数据库认证相关 start-->
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-jdbc</artifactId>
+                    <version>${cas.version}</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.apache.logging.log4j</groupId>
+                            <artifactId>log4j-slf4j-impl</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-jdbc-drivers</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-core-api-authentication</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-core-authentication</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-core-configuration</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc6</artifactId>
+                    <version>11.1.0.7.0</version>
+                </dependency>
+                <!-- cas 的redis依赖 -->
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-redis-ticket-registry</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-webapp-session-redis</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+
+               <!-- <dependency>
+                    <groupId>org.cryptacular</groupId>
+                    <artifactId>cryptacular</artifactId>
+                    <version>1.2.2</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-throttle</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-pm-webflow</artifactId>
+                    <version>${cas.version}</version>
+                </dependency>-->
+
+
+                <!--   <dependency>
+                       <groupId>org.springframework.boot</groupId>
+                       <artifactId>spring-boot-starter-web</artifactId>
+                   </dependency>-->
+                <!--数据库认证相关 end-->
+                <!--导入配置文件处理器，配置文件进行绑定就会有提示-->
+               <!-- <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-configuration-processor</artifactId>
+                    <version>1.5.12.RELEASE</version>
+                    <optional>true</optional>
+                </dependency>-->
             </dependencies>
         </profile>
 

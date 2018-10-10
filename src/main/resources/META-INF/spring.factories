@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.ai.cas.MyAuthenticationConfiguration,\
+com.ai.cas.controller.SpringConfig
+
