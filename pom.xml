@@ -51,7 +51,7 @@
                         </overlay>
                     </overlays>
                     <dependentWarExcludes>
-                        **/services/*.json,**/templates/protocol/2.0/casServiceValidationSuccess.html
+                        **/services/*.json,**/templates/protocol/2.0/casServiceValidationSuccess.html,**/webflow/login/login-webflow.xml,**/templates/fragments/loginform.html,messages*.properties
                     </dependentWarExcludes>
                 </configuration>
             </plugin>
@@ -69,7 +69,8 @@
         <springboot.version>1.5.12.RELEASE</springboot.version>
         <!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan to provide appserver -->
         <app.server>-tomcat</app.server>
-
+        <druid-boot.version>1.1.5</druid-boot.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
         <mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
         <isExecutable>false</isExecutable>
         <manifestFileToUse>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF</manifestFileToUse>
@@ -133,7 +134,11 @@
                             <groupId>org.apache.logging.log4j</groupId>
                             <artifactId>log4j-slf4j-impl</artifactId>
                         </exclusion>
-                    </exclusions>
+                        <exclusion>
+                            <groupId>ch.qos.logback</groupId>
+                            <artifactId>logback-classic</artifactId>
+                        </exclusion>
+            </exclusions>
                 </dependency>
                 <dependency>
                     <groupId>org.apereo.cas</groupId>
@@ -172,7 +177,28 @@
                     <artifactId>cas-server-webapp-session-redis</artifactId>
                     <version>${cas.version}</version>
                 </dependency>
-
+               <!-- <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-core-webflow</artifactId>
+                    <version>${cas.version}</version>
+                    <scope>provided</scope>
+                </dependency>-->
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-actions</artifactId>
+                    <version>${cas.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>druid-spring-boot-starter</artifactId>
+                    <version>${druid-boot.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                    <version>${servlet-api.version}</version>
+                </dependency>
                <!-- <dependency>
                     <groupId>org.cryptacular</groupId>
                     <artifactId>cryptacular</artifactId>

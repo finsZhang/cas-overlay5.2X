@@ -1,4 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.ai.cas.MyAuthenticationConfiguration,\
-com.ai.cas.controller.SpringConfig
+com.ai.cas.mvc.SpringConfig,\
+com.ai.cas.webflow.config.CustomAuthWebflowConfiguration,\
+com.ai.cas.webflow.config.CustomAuthenticationConfiguration
+
+
 

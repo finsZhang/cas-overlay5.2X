@@ -1,6 +1,6 @@
-package com.ai.cas;
+package com.ai.cas.webflow.config;
 
-import com.ai.cas.handler.Login;
+import com.ai.cas.webflow.handler.LoginAuthenticationHandler;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;
@@ -12,10 +12,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-@Configuration("MyAuthenticationConfiguration")
+/**
+ * Created with IntelliJ IDEA.
+ * Description:修改默认登录校验Handler
+ * Author: zhangfengzhou
+ * Date: 2018-10-11
+ * Time: 15:09
+ */
+@Configuration("CustomAuthenticationConfiguration")
 @EnableConfigurationProperties(CasConfigurationProperties.class)
-public class MyAuthenticationConfiguration implements AuthenticationEventExecutionPlanConfigurer {
+public class CustomAuthenticationConfiguration implements AuthenticationEventExecutionPlanConfigurer {
 
     @Autowired
     private CasConfigurationProperties casProperties;
@@ -26,13 +32,12 @@ public class MyAuthenticationConfiguration implements AuthenticationEventExecuti
 
     @Bean
     public AuthenticationHandler myAuthenticationHandler() {
-        final Login handler = new Login(Login.class.getSimpleName(), servicesManager, new DefaultPrincipalFactory(), 10);
+        final LoginAuthenticationHandler handler = new LoginAuthenticationHandler(LoginAuthenticationHandler.class.getSimpleName(), servicesManager, new DefaultPrincipalFactory(), 10);
         return handler;
     }
 
     @Override
     public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
-        // TODO Auto-generated method stub
         plan.registerAuthenticationHandler(myAuthenticationHandler());
     }
 
