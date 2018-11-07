@@ -13,4 +13,5 @@
     "pattern": "^(https|http)?://.*"
   },
   "logoutUrl": "https://127.0.0.1:9103/cas/logout"
+  "theme" : "xyCas"
 }
